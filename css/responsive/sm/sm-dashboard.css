@@ -1,0 +1,10 @@
+@media (min-width: 768px){
+    html{
+        background: url(../../../img/sm/map_sm.png)no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+}

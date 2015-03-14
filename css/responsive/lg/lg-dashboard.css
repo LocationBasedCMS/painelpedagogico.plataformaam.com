@@ -1,0 +1,17 @@
+@media (min-width: 1200px){
+    html{
+        background: url(../../../img/lg/map_lg.png)no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+
+    .col-md-4 > .panel > .panel-body {
+        min-height: 180px;
+    }
+    .col-lg-4 > .panel > .panel-body {
+        min-height: 220px;
+    }
+}

@@ -1,0 +1,16 @@
+<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+    <div class="container-fluid alert-success">
+        <form class="form-signin" role="form"  ng-model="login_user" >
+            <h2 class="form-signin-heading">Painel Pedagógico!</h2>
+            <input type="text" class="form-control" placeholder="login" required autofocus ng-model="login_user.login">
+            <input type="password" class="form-control" placeholder="Password" required ng-model="login_user.password" >
+            <button class="btn btn-sm btn-success btn-block" ng-click="doLogin()"  >Logar</button>
+        </form>
+    </div>
+    <div>
+        <pre>
+            {{result}}
+        </pre>
+    </div>
+</div> <!-- /container -->
+

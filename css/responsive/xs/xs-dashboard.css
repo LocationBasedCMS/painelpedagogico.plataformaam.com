@@ -1,0 +1,13 @@
+/* 
+*/
+@media (min-width : 320px){
+    html{
+        background: url(../../../img/xs/map_xs.png)no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+}
+
+
