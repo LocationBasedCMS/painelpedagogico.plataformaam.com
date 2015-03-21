@@ -7,7 +7,7 @@ PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessi
 
         //FUNCOES 
         $scope.doLogin = function () {
-            $scope.result = 'Tentando efetuar login...';
+            $scope.message = 'Tentando efetuar login...';
             UserSessionService.doLogin($scope.login_user.login,$scope.login_user.password );
         };
 
@@ -18,7 +18,7 @@ PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessi
             if( newVal ){
                 $location.path('/panel');
             } else{
-                $scope.result = '';
+                $scope.message = '';
             }
         });        
         
