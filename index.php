@@ -16,8 +16,13 @@
         <link href="./css/responsive/sm/sm-dashboard.css" rel="stylesheet" />
         <link href="./css/responsive/md/md-dashboard.css" rel="stylesheet" />
         <link href="./css/responsive/lg/lg-dashboard.css" rel="stylesheet" />
-
         <link href="./css/ui/login.css" rel="stylesheet" />
+
+        
+        <link rel="stylesheet" href="./css/font-awesome-4.3.0/css/font-awesome.min.css" >
+        
+        
+        
 
 
 
@@ -36,10 +41,19 @@
         <script src="./js/libs/angular-1.4.0/angular-route.min.js"></script>
         
         <!-- Scripts de JS :: APLICACAO-->
-        <script src="./js/painel.pedagogico/controller.js"></script>
         <script src="./js/painel.pedagogico/configurations.js"></script>
-        <script src="./js/painel.pedagogico/filters.js"></script>
+                <script src="./js/painel.pedagogico/filters.js"></script>
+                
         <script src="./js/painel.pedagogico/services.js"></script>
+        <script src="./js/painel.pedagogico/controller.js"></script>
+        
+        <!-- USER SESSION -->
+        <script src="./js/painel.pedagogico/controllers/login.controller.js"></script>
+        <script src="./js/painel.pedagogico/services/usersession.service.js"></script>
+        
+        <!-- NOT IMPLEMENTED -->
+        <script src="./js/painel.pedagogico/controllers/not.implemented.controller.js"></script>
+
         
 
     </body>
