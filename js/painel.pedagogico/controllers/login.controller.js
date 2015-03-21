@@ -1,12 +1,10 @@
 var PainelPedagogico = angular.module('PainelPedagogico');
 PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessionService', function ($scope,$location, UserSessionService) {
-
-        //TODO remover este login automático//Valores
         $scope.login_user = {
             login: null,
             password: null
         };        
-        
+
         //FUNCOES 
         $scope.doLogin = function () {
             $scope.result = 'Tentando efetuar login...';
@@ -19,11 +17,12 @@ PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessi
         }, function (newVal) {
             if( newVal ){
                 $location.path('/panel');
+            } else{
+                $scope.result = '';
             }
         });        
         
         
-            
-
+        //TODO remoer login automático
         //$scope.doLogin();
     }]);
