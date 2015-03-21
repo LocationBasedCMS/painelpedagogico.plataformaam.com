@@ -14,21 +14,25 @@ PainelPedagogico.config(function($routeProvider, $locationProvider) {
             })
             .when('/panel', {
                 templateUrl: 'painel.pedagogico/panel.html',
-                controller: 'PanelController'
-
+                controller: 'CompositeController'
             })
-            .when('/panel/vcomcomposite/:composite', {
+            
+            .when('/panel/composite/:composite', {
                 templateUrl: 'painel.pedagogico/panel-composite.html',
-                controller: 'PanelController'
+                controller: 'CompositeController'
             })
-            .when('/panel/vcomcomposite/:composite/user/:user', {
+            .when('/panel/composite/:composite/user/:user', {
                 templateUrl: 'painel.pedagogico/not-implemented.html',
                 controller: 'NotImplemented'
             })
-            .when('/panel/vcomcomposite/:composite/publication/:publication/', {
+            .when('/panel/composite/:composite/publication/:publication/', {
                 templateUrl: 'painel.pedagogico/not-implemented.html',
                 controller: 'NotImplemented'
-            })     
+            })
+            .when('/other', {
+                templateUrl: 'painel.pedagogico/not-implemented.html',
+                controller: 'NotImplemented'
+            })            
             .otherwise({
                 templateUrl: 'painel.pedagogico/login-form.html',
                 controller: 'LoginController'
