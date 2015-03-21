@@ -50,6 +50,9 @@
         <!-- USER SESSION -->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/login.controller.js"></script>
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/services/user.session.service.js"></script>
+
+        <!-- COMPOSITE -->
+        <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/composite.controller.js"></script>
         
         <!-- NOT IMPLEMENTED -->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/not.implemented.controller.js"></script>
