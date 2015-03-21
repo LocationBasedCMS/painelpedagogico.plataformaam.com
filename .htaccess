@@ -1,0 +1,4 @@
+AddType image/gif .gif
+AddType image/jpg .jpg
+AddType image/jpeg .jpeg
+AddType image/png .png
