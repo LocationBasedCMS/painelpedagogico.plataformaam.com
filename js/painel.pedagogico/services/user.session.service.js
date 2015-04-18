@@ -32,8 +32,7 @@ PainelPedagogico.service('UserSessionService', ['$http',function ($http) {
                     "HTTP_X_REST_PASSWORD": password,
                     "X_REST_CORS": 'Yes',
                 };
-                console.log('UserSessionService', 'doLogin', "http://painelpedagogico.plataformaam.com/v1/index.php/api/User", myHeaders)
-                $http.get('http://painelpedagogico.plataformaam.com/v1/index.php/api/User?filter=[{"property": "login", "value" : "' + login + '", "operator": "="}]',
+                $http.get('http://api.plataformaam.com/v2/index.php/api/User?filter=[{"property": "login", "value" : "' + login + '", "operator": "="}]',
                     {
                         headers: myHeaders,
                     }
