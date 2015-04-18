@@ -1,5 +1,5 @@
 
-var PainelPedagogico = angular.module('PainelPedagogico', ['ngRoute']);
+var PainelPedagogico = angular.module('PainelPedagogico', ['ngRoute','leaflet-directive']);
 
 
 PainelPedagogico.config(function($routeProvider, $locationProvider) {
@@ -16,10 +16,9 @@ PainelPedagogico.config(function($routeProvider, $locationProvider) {
                 templateUrl: 'painel.pedagogico/panel.html',
                 controller: 'CompositeController'
             })
-            
-            .when('/panel/composite/:composite', {
+            .when('/panel/composite/:composite/', {
                 templateUrl: 'painel.pedagogico/panel-composite.html',
-                controller: 'CompositeController'
+                controller: 'CompositeSelectedController'
             })
             .when('/panel/composite/:composite/user/:user', {
                 templateUrl: 'painel.pedagogico/not-implemented.html',
@@ -34,8 +33,7 @@ PainelPedagogico.config(function($routeProvider, $locationProvider) {
                 controller: 'NotImplemented'
             })            
             .otherwise({
-                templateUrl: 'painel.pedagogico/login-form.html',
-                controller: 'LoginController'
+                 redirectTo: "/login"
             });
 
 });
