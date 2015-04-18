@@ -17,10 +17,12 @@
         <link href="http://painelpedagogico.plataformaam.com/css/responsive/md/md-dashboard.css" rel="stylesheet" />
         <link href="http://painelpedagogico.plataformaam.com/css/responsive/lg/lg-dashboard.css" rel="stylesheet" />
         <link href="http://painelpedagogico.plataformaam.com/css/ui/login.css" rel="stylesheet" />
-
-        
         <link rel="stylesheet" href="http://painelpedagogico.plataformaam.com/css/font-awesome-4.3.0/css/font-awesome.min.css" />
         
+        <!-- Maps -->
+        <link rel="stylesheet" href="http://painelpedagogico.plataformaam.com/js/libs/leafletjs/leaflet.css">
+        
+        <base href="/"></base>
         
         
 
@@ -40,6 +42,11 @@
         <script src="http://painelpedagogico.plataformaam.com/js/libs/angular-1.4.0/angular.min.js"></script>
         <script src="http://painelpedagogico.plataformaam.com/js/libs/angular-1.4.0/angular-route.min.js"></script>
         
+        <!-- Scripts de JS :: MAPS-->
+        <script src="http://painelpedagogico.plataformaam.com/js/libs/leafletjs/leaflet.js"></script>
+        <script src="http://painelpedagogico.plataformaam.com/js/libs/leafletjs/angular-leaflet-directive.min.js"></script>
+
+        
         <!-- Scripts de JS :: APLICACAO-->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/configurations.js"></script>
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/filters.js"></script>
@@ -51,8 +58,13 @@
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/login.controller.js"></script>
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/services/user.session.service.js"></script>
 
+        
+        
+        
         <!-- COMPOSITE -->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/composite.controller.js"></script>
+        <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/composite.selected.controller.js"></script>
+        <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/services/composite.service.js"></script>
         
         <!-- NOT IMPLEMENTED -->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/not.implemented.controller.js"></script>
