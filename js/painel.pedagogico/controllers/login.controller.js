@@ -1,8 +1,8 @@
 var PainelPedagogico = angular.module('PainelPedagogico');
 PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessionService', function ($scope,$location, UserSessionService) {
         $scope.login_user = {
-            login: null,
-            password: null
+            login: '',
+            password: ''
         };        
 
         //FUNCOES 
@@ -24,5 +24,5 @@ PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessi
         
         
         //TODO remoer login automático
-        //$scope.doLogin();
+        $scope.doLogin();
     }]);

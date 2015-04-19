@@ -8,7 +8,11 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
                 var user = UserSessionService.getUser();
                 $http.get('http://api.plataformaam.com/v2/index.php/api/VComComposite?filter=[{"property": "id", "value" : "1", "operator": "<>"}]',
                         {
-                            headers: {"HTTP_X_REST_USERNAME": user.login, "HTTP_X_REST_PASSWORD": user.password, "X_REST_CORS": 'Yes'}
+                            headers: {
+                                "HTTP_X_REST_USERNAME": user.login, 
+                                "HTTP_X_REST_PASSWORD": user.password, 
+                                "HTTP_X_REST_CORS": 'Yes'
+                            }
                         }
                 ).success(function (response) {
                     if (response.success && response.data.totalCount > 0) {
