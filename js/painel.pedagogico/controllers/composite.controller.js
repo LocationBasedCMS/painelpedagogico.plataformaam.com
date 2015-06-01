@@ -5,6 +5,7 @@ PainelPedagogico.controller('CompositeController',
             function ($scope, $location, $timeout, CompositeService, UserSessionService) {
                 if (!UserSessionService.isLogged()) {
                     $location.path('/login');
+                    
                 } else {
                     $scope.user = UserSessionService.getUser();
                 }
@@ -13,6 +14,5 @@ PainelPedagogico.controller('CompositeController',
                 CompositeService.load(function(){
                     $scope.composites = CompositeService.getComposites();
                 });
-
 
             }]);

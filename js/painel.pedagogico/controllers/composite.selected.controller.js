@@ -21,12 +21,12 @@ PainelPedagogico.controller('CompositeSelectedController', [
         });
 
 
-        var fnDrawVirtualSpace = function (virtualspace) {
+        var fnDrawVirtualSpace = function (virtualspace,iColor) {
             console.log('fnDrawVirtualSpace', virtualspace);
             if (virtualspace != null) {
                 $scope.paths.push(
                         {
-                            color: '#008000',
+                            color: iColor,
                             weight: 2,
                             latlngs: [
                                 {
@@ -96,9 +96,19 @@ PainelPedagogico.controller('CompositeSelectedController', [
             if (composite != null) {
                 $scope.composite = composite;
                 //GET USERS
+                
                 CompositeService.getCompositeUsers(composite, function (users) {
                     $scope.compositeUsers = users;
                 });
+                
+                //GET BASES
+                
+                CompositeService.getCompositeBase(composite,function(bases){
+                    angular.forEach(bases, function(base,key){
+                        fnDrawVirtualSpace(base.virtualspace0,'#FF5050');
+                    });
+                });
+                
                 //GET PUBLICATIONS
                 CompositeService.getCompositePublication(composite, function (publications) {
                     $scope.compositePublications = publications;
@@ -107,8 +117,11 @@ PainelPedagogico.controller('CompositeSelectedController', [
 
                     });
                 });
+                
                 fnCenterMap(composite.virtualspace0);
-                fnDrawVirtualSpace(composite.virtualspace0);
+                fnDrawVirtualSpace(composite.virtualspace0,'#800050');
+                console.log(composite);
+                
             } else {
                 console.log('CompositeSelectedController', 'error', 'Composite Not Found');
                 $location.path('/panel');

@@ -6,7 +6,8 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
         var loadComposites = function (callback) {
             if (UserSessionService.isLogged( )) {
                 var user = UserSessionService.getUser();
-                $http.get('http://api.plataformaam.com/v2/index.php/api/VComComposite?filter=[{"property": "id", "value" : "1", "operator": "<>"}]',
+                var url = 'http://api.plataformaam.com/v3/index.php/api/VComComposite?filter=[{"property": "id", "value" : "1", "operator": "<>"}]';
+                $http.get(url,
                         {
                             headers: {
                                 "HTTP_X_REST_USERNAME": user.login, 
@@ -17,6 +18,9 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
                 ).success(function (response) {
                     if (response.success && response.data.totalCount > 0) {
                         composites = response.data.vComComposite;
+                        
+                        
+                        
                         if (angular.isFunction(callback)) {
                             callback(composites);
                         }
@@ -69,9 +73,13 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
                             "operator": "in"
                         }];
 
-                    $http.get('http://painelpedagogico.plataformaam.com/v1/index.php/api/VComUserRole?filter=' + filter,
+                    $http.get('http://api.plataformaam.com/v3/index.php/api/VComUserRole?filter=' + filter,
                             {
-                                headers: {"HTTP_X_REST_USERNAME": user.login, "HTTP_X_REST_PASSWORD": user.password, "X_REST_CORS": 'Yes'}
+                                headers: {
+                                    "HTTP_X_REST_USERNAME": user.login, 
+                                    "HTTP_X_REST_PASSWORD": user.password, 
+                                    "HTTP_X_REST_CORS": 'Yes'
+                                }
                             }
                     ).success(function (response) {
                         if (response.success && response.data.totalCount > 0) {
@@ -109,23 +117,28 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
 
         var fnGetCompositePublication = function (composite, Callback) {
             if (composite != null) {
-                var bases = [];
+                var baseIDs = [];
                 angular.forEach(composite.vComBases, function (value) {
-                    bases.push(value.id);
+                    baseIDs.push(value.id);
                 });
-                if (bases.length == 0) {
+                if (baseIDs.length == 0) {
                     Callback(null);
                 } else {
                     var user = UserSessionService.getUser();
                     var filter = [{
                             "property": "vcombase",
-                            "value": bases,
+                            "value": baseIDs,
                             "operator": "in"
                         }];
 
-                    $http.get('http://painelpedagogico.plataformaam.com/v1/index.php/api/VComUPIPublication?filter=' + filter,
+                    $http.get('http://api.plataformaam.com/v3/index.php/api/VComUPIPublication?filter=' + filter,
                             {
-                                headers: {"HTTP_X_REST_USERNAME": user.login, "HTTP_X_REST_PASSWORD": user.password, "X_REST_CORS": 'Yes'}
+                                headers: {
+                                    "HTTP_X_REST_USERNAME": user.login, 
+                                    "HTTP_X_REST_PASSWORD": user.password, 
+                                    "HTTP_X_REST_CORS": 'Yes'
+                                }
+                        
                             }
                     ).success(function (response) {
                             if (response.success && response.data.totalCount > 0) {
@@ -145,7 +158,51 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
         };
 
 
+        var fnGetCompositeBases = function(composite, Callback){
+                var baseIDs = [];
+                angular.forEach(composite.vComBases, function (value) {
+                    baseIDs.push(value.id);
+                });
+                if (baseIDs.length == 0) {
+                    Callback(null);
+                } else {
+                    var user = UserSessionService.getUser();
+                    var myFilter =    [{
+                            property  : "id",
+                            value     : baseIDs,
+                            operator  : "in"
+                        }];
+                    
+                    //console.log('DEBUG',myFilter);
+                    //console.log('DEBUG', angular.valueOf(myFilter));
+                    //console.log('DEBUG', angular.toJson(  myFilter));
+                    //console.log('DEBUG',  myFilter.toString() );
+                    
+                    var url = 'http://api.plataformaam.com/v3/index.php/api/VComBase?filter=' + angular.toJson(  myFilter);
+                    $http.get(url,
+                            {
+                                headers: {
+                                    "HTTP_X_REST_USERNAME": user.login, 
+                                    "HTTP_X_REST_PASSWORD": user.password, 
+                                    "HTTP_X_REST_CORS": 'Yes'
+                                }                               
+                               
+                            }
+                    ).success(function (response) {
+                            if (response.success && response.data.totalCount > 0) {
+                                Callback(response.data.vComBase);
+                            }else{
+                                Callback(null);
+                            }
+                    }).error(function (error) {
+                        console.log("ERRO", error)
+                        Callback(null);
+                    });
 
+
+
+                }
+        };
 
         var CompositeService = {
             load: function (callback) {
@@ -167,6 +224,9 @@ PainelPedagogico.service('CompositeService', ['$http', 'UserSessionService', '$r
             },
             getCompositePublication: function (composite, CallBack) {
                 fnGetCompositePublication(composite, CallBack);
+            },
+            getCompositeBase: function(composite,CallBack){
+                fnGetCompositeBases(composite,CallBack);
             }
         };
         return CompositeService;
