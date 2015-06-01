@@ -1,18 +1,19 @@
 var PainelPedagogico = angular.module('PainelPedagogico');
 //DEVE SER REIMPLEMENTADO PARA GARANTIR A SEGURANÇA
 PainelPedagogico.service('OnlineUserService',['$http','UserSessionService',  function ($http, UserSessionService) {
-    var url = 'http://api.plataformaam.com/v3/index.php/api/OnlineUser';
+    var url = 'http://api.plataformaam.com/v3/index.php/api/OnlineUser?filter=';
     
     
     var fnGetUserLocation = function(user,Callback){
         if( !angular.isUndefined(user)  ){
             var sessionUser = UserSessionService.getUser();
             var myFilter =    [{
-                property  : "id",
+                property  : "user",
                 value     : user.id,
                 operator  : "="
             }];
-            $http.get(url,
+            
+            $http.get(url+angular.toJson(myFilter),
                     {
                         headers: {
                             "HTTP_X_REST_USERNAME": sessionUser.login, 

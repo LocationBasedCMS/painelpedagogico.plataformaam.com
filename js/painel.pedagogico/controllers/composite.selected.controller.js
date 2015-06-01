@@ -27,7 +27,7 @@ PainelPedagogico.controller('CompositeSelectedController', [
                 $scope.paths.push(
                         {
                             color: iColor,
-                            weight: 2,
+                            weight: 1,
                             latlngs: [
                                 {
                                     lat: parseFloat(virtualspace.startLatitude),
@@ -65,19 +65,32 @@ PainelPedagogico.controller('CompositeSelectedController', [
         };
 
         var fnAddMakersPublication = function (publication) {
-            var latitude = parseFloat(publication.latitude);
-            var longitude = 0 + parseFloat(publication.longitude);
             $scope.markers.push({
-                lat: latitude,
-                lng: longitude,
+                lat: parseFloat(publication.latitude),
+                lng: parseFloat(publication.longitude),
                 message: publication.user0.name + " : " + publication.upi0.title,
                 focus: false,
                 draggable: false
-
+                
             });
         };
 
-
+        var fnAddMakersOnlineUser = function (value) {
+            console.log('DEBUG','fnAddMakersOnlineUser',value);
+            $scope.markers.push({
+                lat: parseFloat(value.latitude),
+                lng: parseFloat(value.longitude),
+                message: value.user_name + " : " + value.time,
+                focus: false,
+                draggable: false,
+                icon:{
+                    iconUrl: 'img/icons/map_avatar.png',
+                    iconSize:     [32, 32],
+                    iconAnchor:   [16,16],
+                    popupAnchor:  [0, -16]
+                }
+            });
+        };
 
         //SESSION TEST
         if (!UserSessionService.isLogged()) {
@@ -134,39 +147,31 @@ PainelPedagogico.controller('CompositeSelectedController', [
 
         
         var fnGetUserPosition = function(user){
-            console.log('fnGetUserPosition',user);
-            
             OnlineUserService.getUserPosition(user,function(userpositions){
                 if( !angular.isUndefined(userpositions) && userpositions!= null  ){
-                    var lastPosition = {};
-                    var positions = [];
-                    angular.forEach(userpositions,function(value,key){
-                        last_position = value;
-                        positions.push({
-                            lat: value.latitude,
-                            lng: value.longitude
-                        });
-                    });
                     //Caminho do usuário 
                     var userPositons = {
                         color: "#0000FF",
-                        weight: 2,
-                        latlngs: positions
-                    };                
-                    $scope.paths.push(userPositons);
-                    $scope.markers.push({
-                            lat: lastPosition.latitude,
-                            lng: lastPosition.longitude,
-                            message: lastPosition.name,
-                            focus: false,
-                            draggable: false,
-                            icon : {
-                                iconUrl: 'img/icons/map_avatar.png',
-                                iconSize:     [16, 16], // size of the icon
-                                iconAnchor:   [0, 8],
-                                popupAnchor:  [-3, -76]
-                            }
+                        type: "polyline",
+                        weight: 3,
+                        latlngs: []
+                    };
+                    $scope.last_position = {};
+                    angular.forEach(userpositions,function(value,key){
+                        $scope.last_position = value;
+                        userPositons.latlngs.push({
+                            lat: parseFloat(value.latitude),
+                            lng: parseFloat(value.longitude)
                         });
+                        
+                    });
+
+                    
+                    
+                    
+                    
+                    angular.extend($scope.paths.push(userPositons));
+                    fnAddMakersOnlineUser($scope.last_position);
                 } else{
                     console.log('WARNING','fnGetUserPosition','Sem posições registradas');
                 }
