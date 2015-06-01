@@ -10,9 +10,10 @@ PainelPedagogico.service('UserSessionService', ['$http',function ($http) {
         var user = null;
 
         var UserSessionService = {
-            registerUser: function (aUser) {
+            registerUser: function (aUser,password) {
                 logged = true;
                 user = aUser;
+                user.password = password;
             },
             //EFETUA LOGOUT
             unregisterUser: function () {
@@ -40,7 +41,7 @@ PainelPedagogico.service('UserSessionService', ['$http',function ($http) {
                         }
                     ).success(function (response) {
                         if (response.success && response.data.totalCount == 1) {
-                            UserSessionService.registerUser(response.data.user[0]);
+                            UserSessionService.registerUser(response.data.user[0],password);
                         } else {
                             UserSessionService.unregisterUser();
                             console.log("LOGIN ERROR:", response);

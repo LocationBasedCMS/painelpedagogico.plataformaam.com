@@ -1,8 +1,8 @@
 var PainelPedagogico = angular.module('PainelPedagogico');
 PainelPedagogico.controller('LoginController', ['$scope','$location', 'UserSessionService', function ($scope,$location, UserSessionService) {
         $scope.login_user = {
-            login: 'bernauuudo',
-            password: 'qw'
+            login: '',
+            password: ''
         };        
 
         //FUNCOES 
