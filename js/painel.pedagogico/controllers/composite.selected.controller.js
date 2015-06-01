@@ -1,8 +1,8 @@
 var PainelPedagogico = angular.module('PainelPedagogico');
 
 PainelPedagogico.controller('CompositeSelectedController', [
-    '$scope', '$route', '$routeParams', '$location', 'CompositeService', 'UserSessionService',
-    function ($scope, $route, $routeParams, $location, CompositeService, UserSessionService) {
+    '$scope', '$route', '$routeParams', '$location', 'CompositeService', 'UserSessionService','OnlineUserService',
+    function ($scope, $route, $routeParams, $location, CompositeService, UserSessionService, OnlineUserService) {
         //MAP CONFIGURATION
         angular.extend($scope, {
             center: {
@@ -132,11 +132,50 @@ PainelPedagogico.controller('CompositeSelectedController', [
 
 
 
+        
+        var fnGetUserPosition = function(user){
+            console.log('fnGetUserPosition',user);
+            
+            OnlineUserService.getUserPosition(user,function(userpositions){
+                if( !angular.isUndefined(userpositions) && userpositions!= null  ){
+                    var lastPosition = {};
+                    var positions = [];
+                    angular.forEach(userpositions,function(value,key){
+                        last_position = value;
+                        positions.push({
+                            lat: value.latitude,
+                            lng: value.longitude
+                        });
+                    });
+                    //Caminho do usuário 
+                    var userPositons = {
+                        color: "#0000FF",
+                        weight: 2,
+                        latlngs: positions
+                    };                
+                    $scope.paths.push(userPositons);
+                    $scope.markers.push({
+                            lat: lastPosition.latitude,
+                            lng: lastPosition.longitude,
+                            message: lastPosition.name,
+                            focus: false,
+                            draggable: false,
+                            icon : {
+                                iconUrl: 'img/icons/map_avatar.png',
+                                iconSize:     [16, 16], // size of the icon
+                                iconAnchor:   [0, 8],
+                                popupAnchor:  [-3, -76]
+                            }
+                        });
+                } else{
+                    console.log('WARNING','fnGetUserPosition','Sem posições registradas');
+                }
+            });
+            
+        };
+        
 
-
-
-
-
-
-
+        $scope.getUserPosition  = function(user){
+            fnGetUserPosition(user);
+        };
     }]);

@@ -57,7 +57,7 @@
         <!-- USER SESSION -->
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/controllers/login.controller.js"></script>
         <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/services/user.session.service.js"></script>
-
+        <script src="http://painelpedagogico.plataformaam.com/js/painel.pedagogico/services/onlineuser.service.js"></script>
         
         
         
